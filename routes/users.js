@@ -1,32 +1,42 @@
 const router = require('express').Router();
-const posts = require('./../repositorios/resources/posts.json');
-const albums = require('./../repositorios/resources/albums.json');
-const todos = require('./../repositorios/resources/todos.json');
 const users = require('./../repositorios/resources/users.json');
+//const posts = require('./../repositorios/resources/posts.json');
+// const albums = require('./../repositorios/resources/albums.json');
+// const todos = require('./../repositorios/resources/todos.json');
 
 router.get('/', (req, res) => {
 
     if (req.query.fields != null) {
-        // const fields = req.query.fields.split(',');
+        const fields = req.query.fields.split(',');
 
-        // const allContent = {};
-        // //res.send(fields);
-        // if (fields.includes('posts')) {
-        //     allContent.posts = posts;
-        // }
+        const allContent = {};
+        if (fields.includes('posts')) {
+            allContent.users = users;
+            //allContent.users[0].posts = "no one like you";
 
-        // if (fields.includes('albums')) {
-        //     allContent.albums = albums;
-        // }
+            for(i = 0; i< posts.lenght; i++){
+                if(posts.userId = users.id){
+                    allContent.users[i].posts = posts.body;
+                }
+            }
+        }
 
-        // if (fields.includes('todos')) {
-        //     allContent.todos = todos;
-        // }
-
-        // res.send(allContent);
-        res.send("va con query strings");
+        res.send(allContent);
     }else{
         res.send(users);
+    }
+});
+
+router.post('/', (req,res) => {
+    try {
+        const { body } = req;
+        const id = users[users.length - 1].id + 1;
+        const newUser = {id, ...body};
+        console.log(newUser);
+        res.send(newUser);
+
+    } catch (error) {
+        res.status(500).send(error.message);
     }
 })
 

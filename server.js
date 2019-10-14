@@ -2,9 +2,15 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/routes');
 
-//server config
-app.use(routes);
+//config
 app.set('port', process.env.PORT || 3000);
+
+//middlewares
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
+
+//routes
+app.use(routes);
 
 app.listen(app.get('port'), () => {
     console.log(`server on port ${app.get('port')}`);
