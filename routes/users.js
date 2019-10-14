@@ -1,9 +1,6 @@
 const router = require('express').Router();
 const users = require('./../repositorios/resources/users.json');
-//const posts = require('./../repositorios/resources/posts.json');
-// const albums = require('./../repositorios/resources/albums.json');
-// const todos = require('./../repositorios/resources/todos.json');
-
+const { getAllUsers } = require('./../repositorios/users');
 router.get('/', (req, res) => {
 
     if (req.query.fields != null) {

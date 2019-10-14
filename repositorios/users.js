@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-const json = () => {
+const getJsonUser = () => {
     return JSON.parse(fs.readFileSync('./repositorios/resources/users.json'));
 }
 
-// const getAll = () => {
-//     let 
-// }
+const getAll = () => {
+    let getUsers = getJsonUser();
+}
 
 module.exports = {
     getAll
