@@ -2,25 +2,33 @@ const router = require('express').Router();
 const repoUsers = require('./../repositorios/users');
 const repoPosts = require('./../repositorios/posts');
 const repoAlbums = require('./../repositorios/albums');
+const repoTodos = require('./../repositorios/todos');
 
 router.get('/', (req, res) => {
-    let users = repoUsers.getAll();
     try {
+        let users = repoUsers.getAll();
         if (req.query.fields != null) {
             let fields = req.query.fields.split(',');
 
-            if (fields.includes('posts')) {
+            if(fields.includes('posts')) {
                 users = users.map(user => {
                     let posts = repoPosts.getPostByUser(user.id);
                     return { ...user, posts };
-                })
+                });
             }
 
-            if (fields.includes('albums')) {
+            if(fields.includes('albums')) {
                 users = users.map(user => {
                     let albums = repoAlbums.getAlbumsByUser(user.id);
                     return {...user, albums};
-                })
+                });
+            }
+
+            if(fields.includes('todos')){
+                users = users.map(user => {
+                    let todos = repoTodos.getTodoByUser(user.id);
+                    return {...user, todos};
+                });
             }
         }
 
@@ -31,9 +39,23 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    const response = repoPosts.getPostByUser(1);
+    try {
 
-    res.json(response);
+        let userId = req.params.id;
+        let user = repoUsers.getUserById(userId);
+
+        if(req.query.fields != null){
+            let fields = req.query.fields.split(',')
+            let posts = repoPosts.getPostByUser(userId);
+                if(fields.includes('posts')){
+             
+            }
+        }
+
+        // res.send(user);
+    } catch (error) {
+        res.sendStatus(500);
+    }
 });
 
 router.post('/', (req, res) => {

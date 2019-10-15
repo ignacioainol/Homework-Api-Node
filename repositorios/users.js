@@ -9,6 +9,11 @@ const getAll = () => {
     return getUsers;
 }
 
+const getUserById = (userId) => {
+    let user = getJsonUser().find(x => x.id === parseInt(userId));
+    return user;
+}
+
 const save = (body) => {
     const id =  getJsonUser().length + 1;
     const newUser = {id, ...body};
@@ -21,5 +26,6 @@ const save = (body) => {
 
 module.exports = {
     getAll,
+    getUserById,
     save
 }
