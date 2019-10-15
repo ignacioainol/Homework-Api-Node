@@ -30,16 +30,15 @@ router.get('/', (req, res) => {
 
 router.post('/', (req,res) => {
     try {
-        const response = repoUser.save();
-        res.json(response);
-        // const { body } = req;
-        // const id = users[users.length - 1].id + 1;
+        const { body } = req;
+        const newUser = repoUser.save(body);
+        res.json(newUser);
         // const newUser = {id, ...body};
         // console.log(newUser);
         // res.send(newUser);
 
     } catch (error) {
-        res.status(500).send(error);
+        res.sendStatus(500).send(error);
     }
 })
 

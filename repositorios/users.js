@@ -10,7 +10,13 @@ const getAll = () => {
 }
 
 const save = (body) => {
-    return getJsonUser().length;
+    const id =  getJsonUser().length + 1;
+    const newUser = {id, ...body};
+
+    const users = getJsonUser();
+    users.push(newUser);
+
+    return users;
 }
 
 module.exports = {
