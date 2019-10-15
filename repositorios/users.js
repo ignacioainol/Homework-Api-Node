@@ -9,6 +9,17 @@ const getAll = () => {
     return getUsers;
 }
 
+const save = (body) => {
+    const id =  getJsonUser().length + 1;
+    const newUser = {id, ...body};
+
+    const users = getJsonUser();
+    users.push(newUser);
+
+    return users;
+}
+
 module.exports = {
-    getAll
+    getAll,
+    save
 }
