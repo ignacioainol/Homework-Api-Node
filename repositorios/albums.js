@@ -1,14 +1,14 @@
 const fs = require('fs');
 
 const getData = () => {
-    return JSON.parse(fs.readFileSync('./repositorios/data/posts.json'));
+    return JSON.parse(fs.readFileSync('./repositorios/data/albums.json'));
 }
 
-const getPostByUser = (userId) => {
+const getAlbumsByUser = (userId) => {
     let data = getData();
     return data.filter(x => x.userId === userId) || undefined;
 }
 
 module.exports = {
-    getPostByUser
+    getAlbumsByUser
 }

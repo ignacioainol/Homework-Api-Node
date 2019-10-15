@@ -1,22 +1,25 @@
 const router = require('express').Router();
-const repoUser = require('./../repositorios/users');
-const repoPost = require('./../repositorios/posts');
+const repoUsers = require('./../repositorios/users');
+const repoPosts = require('./../repositorios/posts');
+const repoAlbums = require('./../repositorios/albums');
 
 router.get('/', (req, res) => {
-    let users = repoUser.getAll();
+    let users = repoUsers.getAll();
     try {
         if (req.query.fields != null) {
             let fields = req.query.fields.split(',');
+
             if (fields.includes('posts')) {
-
-                // for (let i = 0; i < users.length; i++) {
-                //     let posts = repoPost.getPostByUser(users[i].id);
-                //     users[i] = { ...users[i], posts };
-                // }
-
                 users = users.map(user => {
-                    let posts = repoPost.getPostByUser(user.id);
+                    let posts = repoPosts.getPostByUser(user.id);
                     return { ...user, posts };
+                })
+            }
+
+            if (fields.includes('albums')) {
+                users = users.map(user => {
+                    let albums = repoAlbums.getAlbumsByUser(user.id);
+                    return {...user, albums};
                 })
             }
         }
@@ -28,7 +31,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    const response = repoPost.getPostByUser(1);
+    const response = repoPosts.getPostByUser(1);
 
     res.json(response);
 });
@@ -36,7 +39,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     try {
         const { body } = req;
-        const newUser = repoUser.save(body);
+        const newUser = repoUsers.save(body);
         res.json(newUser);
         // const newUser = {id, ...body};
         // console.log(newUser);
