@@ -6,6 +6,11 @@ const getJsonUser = () => {
 
 const getAll = () => {
     let getUsers = getJsonUser();
+    return getUsers;
+}
+
+const save = () => {
+    
 }
 
 module.exports = {
