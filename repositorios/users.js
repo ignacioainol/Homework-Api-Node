@@ -6,6 +6,7 @@ const getJsonUser = () => {
 
 const getAll = () => {
     let getUsers = getJsonUser();
+    return getUsers;
 }
 
 module.exports = {
