@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const getJsonUser = () => {
-    return JSON.parse(fs.readFileSync('./repositorios/resources/users.json'));
+    return JSON.parse(fs.readFileSync('./repositorios/data/users.json'));
 }
 
 const getAll = () => {
