@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const users = require('./../repositorios/resources/users.json');
 const repoUser = require('./../repositorios/users');
 
 router.get('/', (req, res) => {
@@ -31,14 +30,16 @@ router.get('/', (req, res) => {
 
 router.post('/', (req,res) => {
     try {
-        const { body } = req;
-        const id = users[users.length - 1].id + 1;
-        const newUser = {id, ...body};
-        console.log(newUser);
-        res.send(newUser);
+        const response = repoUser.save();
+        res.json(response);
+        // const { body } = req;
+        // const id = users[users.length - 1].id + 1;
+        // const newUser = {id, ...body};
+        // console.log(newUser);
+        // res.send(newUser);
 
     } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).send(error);
     }
 })
 

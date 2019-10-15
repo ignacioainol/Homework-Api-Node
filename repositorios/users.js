@@ -9,10 +9,11 @@ const getAll = () => {
     return getUsers;
 }
 
-const save = () => {
-    
+const save = (body) => {
+    return getJsonUser().length;
 }
 
 module.exports = {
-    getAll
+    getAll,
+    save
 }
