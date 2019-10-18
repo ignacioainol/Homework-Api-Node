@@ -40,19 +40,19 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     try {
-
         let userId = req.params.id;
         let user = repoUsers.getUserById(userId);
+        //let posts = repoPosts.getPostByUser(userId);
 
         if(req.query.fields != null){
             let fields = req.query.fields.split(',')
-            let posts = repoPosts.getPostByUser(userId);
                 if(fields.includes('posts')){
-             
+                    let posts = repoPosts.getPostByUser(userId);
+                    user = {...user, posts};
             }
         }
 
-        // res.send(user);
+        res.send(user);
     } catch (error) {
         res.sendStatus(500);
     }
