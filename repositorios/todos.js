@@ -6,7 +6,7 @@ const getData = () => {
 
 const getTodoByUser = (userId) => {
     let data = getData();
-    return data.filter(x => x.userId === userId) || undefined;
+    return data.filter(x => x.userId === parseInt(userId)) || undefined;
 }
 
 module.exports = {

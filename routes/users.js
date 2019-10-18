@@ -49,7 +49,17 @@ router.get('/:id', (req, res) => {
                 if(fields.includes('posts')){
                     let posts = repoPosts.getPostByUser(userId);
                     user = {...user, posts};
-            }
+                }
+
+                if(fields.includes('albums')){
+                    let albums = repoAlbums.getAlbumsByUser(userId);
+                    user = {...user, albums};
+                }
+
+                if(fields.includes('todos')){
+                    let todos = repoTodos.getTodoByUser(userId);
+                    user = {...user, todos};
+                }
         }
 
         res.send(user);
