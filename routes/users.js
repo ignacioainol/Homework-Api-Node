@@ -64,7 +64,7 @@ router.get('/:id', (req, res) => {
 
         res.send(user);
     } catch (error) {
-        res.sendStatus(500);
+        res.status(500).send(error.message);
     }
 });
 
@@ -73,14 +73,18 @@ router.post('/', (req, res) => {
         const { body } = req;
         const newUser = repoUsers.save(body);
         res.json(newUser);
-        // const newUser = {id, ...body};
-        // console.log(newUser);
-        // res.send(newUser);
 
     } catch (error) {
         res.sendStatus(500).send(error);
     }
-})
+});
+
+router.put('/:id',(req,res) => {
+    let id = req.params.id;
+    let bodie = req.body;
+    //repoUsers.update();
+    res.send(id);
+});
 
 module.exports = router;
 

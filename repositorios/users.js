@@ -24,8 +24,13 @@ const save = (body) => {
     return users;
 }
 
+const update = (body) => {
+    
+}
+
 module.exports = {
     getAll,
     getUserById,
-    save
+    save,
+    update
 }
