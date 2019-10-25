@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const repoUsers = require('./../repositorios/users');
 const repoPosts = require('./../repositorios/posts');
+const repoComments = require('./../repositorios/comments');
 const repoAlbums = require('./../repositorios/albums');
 const repoTodos = require('./../repositorios/todos');
 
@@ -18,12 +19,12 @@ router.get('/',(req,res) => {
                 });
             }
 
-            // if(fields.includes('posts')) {
-            //     users = users.map(user => {
-            //         let posts = repoPosts.getPostByUser(user.id);
-            //         return { ...user, posts };
-            //     });
-            // }
+            if(fields.includes('comments')){
+                posts = posts.map(post => {
+                    let comments = repoComments.getCommentsByPost(post.id);
+                    return { ...post, comments };
+                });
+            }
 
         }
         res.send(posts);
