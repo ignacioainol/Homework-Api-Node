@@ -17,8 +17,7 @@ const getJsonTodos = () => {
 }
 
 const getAll = () => {
-    let getUsers = getJsonUser();
-    return getUsers;
+    return getJsonUser();
 }
 
 const getUserById = (userId) => {
@@ -72,6 +71,11 @@ const findTodosByUserId = (userId) => {
     return todosUser;
 }
 
+const getUserByPost = (userId) => {
+    let data = getJsonUser();
+    return data.filter(x => x.id === parseInt(userId)) || undefined;
+}
+
 module.exports = {
     getAll,
     getUserById,
@@ -80,5 +84,6 @@ module.exports = {
     deleteUser,
     findPostsByUserId,
     findAlbumsByUserId,
-    findTodosByUserId
+    findTodosByUserId,
+    getUserByPost
 }
