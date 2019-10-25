@@ -20,12 +20,20 @@ const save = (body) => {
 
     const users = getJsonUser();
     users.push(newUser);
+    fs.writeFileSync('./repositorios/data/users.json', JSON.stringify(users,null,2));
 
     return users;
 }
 
-const update = (body) => {
-    
+const update = (userId,body) => {
+    const users = getJsonUser();
+
+    const index = users.findIndex(el => el.id == userId);
+    let updateUser = { ...users[index], ...body };
+    users.splice(index,1,updateUser);
+    fs.writeFileSync(`./repositorios/data/users.json`, JSON.stringify(users,null,2));
+
+    return updateUser;
 }
 
 module.exports = {

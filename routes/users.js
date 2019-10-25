@@ -75,15 +75,22 @@ router.post('/', (req, res) => {
         res.json(newUser);
 
     } catch (error) {
-        res.sendStatus(500).send(error);
+        res.status(500).send(error);
     }
 });
 
 router.put('/:id',(req,res) => {
-    let id = req.params.id;
-    let bodie = req.body;
-    //repoUsers.update();
-    res.send(id);
+    try {
+        const { id } = req.params;
+        const { body } = req;
+
+        const updateUser = repoUsers.update(id,body);
+        res.send(updateUser);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+    
+
 });
 
 module.exports = router;
