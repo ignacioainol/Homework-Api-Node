@@ -4,6 +4,10 @@ const getJsonUser = () => {
     return JSON.parse(fs.readFileSync('./repositorios/data/users.json'));
 }
 
+const getJsonPosts = () => {
+    return JSON.parse(fs.readFileSync('./repositorios/data/posts.json'));
+}
+
 const getAll = () => {
     let getUsers = getJsonUser();
     return getUsers;
@@ -45,10 +49,18 @@ const deleteUser = (userId) => {
     return userDeleted;
 }
 
+const findPostsByUserId = (userId) => {
+    const postsUser = getJsonPosts().filter((el) => el.userId == userId);
+
+    return postsUser;
+    
+}
+
 module.exports = {
     getAll,
     getUserById,
     save,
     update,
-    deleteUser
+    deleteUser,
+    findPostsByUserId
 }

@@ -99,7 +99,16 @@ router.delete('/:id',(req,res) => {
     } catch (error) {
         res.status(500).send(error.message);
     }
-})
+});
+
+router.get('/:id/posts', (req,res) => {
+    try {
+        const posts = repoUsers.findPostsByUserId(req.params.id);
+        res.json(posts);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
 
 module.exports = router;
 
