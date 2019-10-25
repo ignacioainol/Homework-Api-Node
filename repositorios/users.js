@@ -8,6 +8,14 @@ const getJsonPosts = () => {
     return JSON.parse(fs.readFileSync('./repositorios/data/posts.json'));
 }
 
+const getJsonAlbums = () => {
+    return JSON.parse(fs.readFileSync('./repositorios/data/albums.json'));
+}
+
+const getJsonTodos = () => {
+    return JSON.parse(fs.readFileSync('./repositorios/data/todos.json'));
+}
+
 const getAll = () => {
     let getUsers = getJsonUser();
     return getUsers;
@@ -51,9 +59,17 @@ const deleteUser = (userId) => {
 
 const findPostsByUserId = (userId) => {
     const postsUser = getJsonPosts().filter((el) => el.userId == userId);
-
     return postsUser;
-    
+}
+
+const findAlbumsByUserId = (userId) => {
+    const albumsUser = getJsonAlbums().filter((el) => el.userId == userId);
+    return albumsUser;
+}
+
+const findTodosByUserId = (userId) => {
+    const todosUser = getJsonTodos().filter((el) => el.userId == userId);
+    return todosUser;
 }
 
 module.exports = {
@@ -62,5 +78,7 @@ module.exports = {
     save,
     update,
     deleteUser,
-    findPostsByUserId
+    findPostsByUserId,
+    findAlbumsByUserId,
+    findTodosByUserId
 }

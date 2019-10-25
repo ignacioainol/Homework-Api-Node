@@ -110,5 +110,23 @@ router.get('/:id/posts', (req,res) => {
     }
 });
 
+router.get('/:id/albums', (req,res) => {
+    try {
+        const albums = repoUsers.findAlbumsByUserId(req.params.id);
+        res.json(albums);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+router.get('/:id/todos', (req,res) => {
+    try {
+        const todos = repoUsers.findTodosByUserId(req.params.id);
+        res.json(todos);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 module.exports = router;
 
