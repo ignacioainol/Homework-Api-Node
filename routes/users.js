@@ -89,9 +89,17 @@ router.put('/:id',(req,res) => {
     } catch (error) {
         res.status(500).send(error.message);
     }
-    
-
 });
+
+router.delete('/:id',(req,res) => {
+    try {
+        const { id } = req.params;
+        const deleteUser = repoUsers.deleteUser(id);
+        res.send(deleteUser);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+})
 
 module.exports = router;
 

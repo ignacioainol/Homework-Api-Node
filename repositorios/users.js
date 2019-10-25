@@ -20,7 +20,7 @@ const save = (body) => {
 
     const users = getJsonUser();
     users.push(newUser);
-    fs.writeFileSync('./repositorios/data/users.json', JSON.stringify(users,null,2));
+    fs.writeFileSync('./repositorios/data/users.json', JSON.stringify(users,null,1));
 
     return users;
 }
@@ -31,14 +31,24 @@ const update = (userId,body) => {
     const index = users.findIndex(el => el.id == userId);
     let updateUser = { ...users[index], ...body };
     users.splice(index,1,updateUser);
-    fs.writeFileSync(`./repositorios/data/users.json`, JSON.stringify(users,null,2));
+    fs.writeFileSync(`./repositorios/data/users.json`, JSON.stringify(users,null,1));
 
     return updateUser;
+}
+
+const deleteUser = (userId) => {
+    const users = getJsonUser();
+
+    const userDeleted = users.filter((el) => el.id != userId);
+    fs.writeFileSync(`./repositorios/data/users.json`, JSON.stringify(userDeleted,null,1));
+
+    return userDeleted;
 }
 
 module.exports = {
     getAll,
     getUserById,
     save,
-    update
+    update,
+    deleteUser
 }
