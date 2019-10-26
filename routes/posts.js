@@ -44,4 +44,14 @@ router.post('/', (req,res) => {
     }
 });
 
+router.get('/:postId', (req,res) => {
+    try {
+        let post = repoPosts.getPostById(req.params.postId);
+        
+        res.send(post);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 module.exports = router;

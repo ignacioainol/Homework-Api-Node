@@ -24,8 +24,13 @@ const save = (body) => {
     return posts;
 }
 
+const getPostById = (postId) => {
+    return  getJsonPosts().find(x => x.id === parseInt(postId));
+}
+
 module.exports = {
     getPostByUser,
     getAll,
-    save
+    save,
+    getPostById
 }
