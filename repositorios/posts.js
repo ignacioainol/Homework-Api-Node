@@ -36,10 +36,22 @@ const getUserByPost = (userId) => {
     return getJsonUsers().find(x => x.id === parseInt(userId));
 }
 
+const update = (postId,body) => {
+    const posts = getJsonPosts();
+
+    const index = posts.findIndex(el => el.id == postId);
+    let updatePost = { ...posts[index], ...body };
+    posts.splice(index,1,updatePost);
+    fs.writeFileSync(`./repositorios/data/posts.json`, JSON.stringify(posts,null,1));
+
+    return updatePost;
+}
+
 module.exports = {
     getPostByUser,
     getAll,
     save,
+    update,
     getPostById,
     getUserByPost
 }

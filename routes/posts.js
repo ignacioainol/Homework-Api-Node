@@ -66,4 +66,16 @@ router.get('/:postId', (req,res) => {
     }
 });
 
+router.put('/:id', (req,res) => {
+    try {
+        const { id } = req.params;
+        const { body } = req;
+
+        const updatePost = repoPosts.update(id,body);
+        res.send(updatePost);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 module.exports = router;
