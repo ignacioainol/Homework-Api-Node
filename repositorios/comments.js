@@ -6,7 +6,7 @@ const getJsonCommens = () => {
 
 const getCommentsByPost = (postId) => {
     let data = getJsonCommens();
-    return data.filter(x => x.id === parseInt(postId)) || undefined;
+    return data.filter(x => x.postId === parseInt(postId)) || undefined;
 }
 
 module.exports = {

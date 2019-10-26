@@ -47,10 +47,22 @@ router.post('/', (req,res) => {
 router.get('/:postId', (req,res) => {
     try {
         let post = repoPosts.getPostById(req.params.postId);
-        
+
+        if(req.query.fields != null){
+            let fields = req.query.fields.split(',');
+            if(fields.includes('user')){
+                let user = repoPosts.getUserByPost(post.userId);
+                post = {...post, user};
+            }
+
+            if(fields.includes('comments')){
+                let comments = repoComments.getCommentsByPost(post.id);
+                post = {...post, comments};
+            }
+        }
         res.send(post);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send(error.message);
     }
 });
 
