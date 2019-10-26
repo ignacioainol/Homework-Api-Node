@@ -47,11 +47,21 @@ const update = (postId,body) => {
     return updatePost;
 }
 
+const deletePost = (postId) => {
+    const posts = getJsonPosts();
+
+    const postDeleted = posts.filter((el) => el.id != postId);
+    fs.writeFileSync(`./repositorios/data/posts.json`, JSON.stringify(postDeleted,null,1));
+
+    return postDeleted;
+}
+
 module.exports = {
     getPostByUser,
     getAll,
     save,
     update,
+    deletePost,
     getPostById,
     getUserByPost
 }

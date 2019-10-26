@@ -78,4 +78,14 @@ router.put('/:id', (req,res) => {
     }
 });
 
+router.delete('/:id',(req,res) => {
+    try {
+        const { id } = req.params;
+        const deletePost = repoPosts.deletePost(id);
+        res.send(deletePost);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 module.exports = router;
