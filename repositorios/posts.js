@@ -13,7 +13,19 @@ const getAll = () => {
     return getJsonPosts();
 }
 
+const save = (body) => {
+    const id =  getJsonPosts().length + 1;
+    const newPost = {id, ...body};
+
+    const posts = getJsonPosts();
+    posts.push(newPost);
+    fs.writeFileSync('./repositorios/data/posts.json', JSON.stringify(posts,null,1));
+
+    return posts;
+}
+
 module.exports = {
     getPostByUser,
-    getAll
+    getAll,
+    save
 }

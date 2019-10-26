@@ -33,4 +33,15 @@ router.get('/',(req,res) => {
     }
 });
 
+router.post('/', (req,res) => {
+    try {
+        const { body } = req;
+        const newPost = repoPosts.save(body);
+        res.json(newPost);
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 module.exports = router;
