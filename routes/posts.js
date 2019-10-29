@@ -66,12 +66,12 @@ router.get('/:postId', (req,res) => {
     }
 });
 
-router.get(':/postId/comments', (req,res) => {
+router.get('/:postId/comments', (req,res) => {
     try {
         let post = repoPosts.getPostById(req.params.postId);
         let comments = repoComments.getCommentsByPost(req.params.postId);
-        //let post = {...post, comments } 
-        res.send(comments);
+        post = {...post, comments } 
+        res.send(post);
     } catch (error) {
         res.status(500).send(error.message);
     }
