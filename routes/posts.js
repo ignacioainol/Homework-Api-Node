@@ -66,6 +66,26 @@ router.get('/:postId', (req,res) => {
     }
 });
 
+router.get(':/postId/comments', (req,res) => {
+    try {
+        let post = repoPosts.getPostById(req.params.postId);
+        let comments = repoComments.getCommentsByPost(req.params.postId);
+        //let post = {...post, comments } 
+        res.send(comments);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+// router.get('/:id/posts', (req,res) => {
+//     try {
+//         const posts = repoUsers.findPostsByUserId(req.params.id);
+//         res.json(posts);
+//     } catch (error) {
+//         res.status(500).send(error.message);
+//     }
+// });
+
 router.put('/:id', (req,res) => {
     try {
         const { id } = req.params;
