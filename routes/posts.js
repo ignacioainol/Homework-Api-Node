@@ -2,8 +2,6 @@ const router = require('express').Router();
 const repoUsers = require('./../repositorios/users');
 const repoPosts = require('./../repositorios/posts');
 const repoComments = require('./../repositorios/comments');
-const repoAlbums = require('./../repositorios/albums');
-const repoTodos = require('./../repositorios/todos');
 
 router.get('/',(req,res) => {
     try {
@@ -76,15 +74,6 @@ router.get('/:postId/comments', (req,res) => {
         res.status(500).send(error.message);
     }
 });
-
-// router.get('/:id/posts', (req,res) => {
-//     try {
-//         const posts = repoUsers.findPostsByUserId(req.params.id);
-//         res.json(posts);
-//     } catch (error) {
-//         res.status(500).send(error.message);
-//     }
-// });
 
 router.put('/:id', (req,res) => {
     try {
