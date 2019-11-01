@@ -56,6 +56,10 @@ const deletePost = (postId) => {
     return postDeleted;
 }
 
+const getPostByComment = (postId) => {
+    return getJsonPosts().find(x => x.id === parseInt(postId));
+}
+
 module.exports = {
     getPostByUser,
     getAll,
@@ -63,5 +67,6 @@ module.exports = {
     update,
     deletePost,
     getPostById,
-    getUserByPost
+    getUserByPost,
+    getPostByComment
 }

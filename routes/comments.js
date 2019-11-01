@@ -23,6 +23,26 @@ router.get('/',(req,res) => {
     }
 });
 
+router.get('/:id',(req,res) => {
+    try {
+        const commentId = req.params.id;
+        let comment = repoComments.getCommentById(commentId);
+
+        if(req.query.fields != null){
+            const fields = req.query.fields;
+            if(fields == "post"){
+                const post = repoPosts.getPostByComment(comment.postId);
+                comment = {...comment, post};
+            }
+        }
+
+        res.send(comment);
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 router.post('/', (req,res) => {
     try {
         const { body } = req;

@@ -12,6 +12,10 @@ const getAll = () => {
     return getJsonComments();
 }
 
+const getCommentById = (commentId) => {
+    return getJsonComments().find(x => x.id === parseInt(commentId));
+}
+
 const getCommentsByPost = (postId) => {
     let data = getJsonComments();
     return data.filter(x => x.postId === parseInt(postId)) || undefined;
@@ -37,5 +41,6 @@ module.exports = {
     getAll,
     getCommentsByPost,
     getPostByComment,
+    getCommentById,
     save
 }
