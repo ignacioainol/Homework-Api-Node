@@ -32,6 +32,18 @@ const save = (body) => {
     return comments;
 }
 
+const update = (commentId, body) => {
+    const comments = getJsonComments();
+
+    const index = comments.findIndex(el => el.id == commentId);
+    let updateComment = { ...comments[index], ...body };
+    comments.splice(index,1,updateComment);
+
+    fs.writeFileSync(`./repositorios/data/comments.json`, JSON.stringify(comments,null,1));
+
+    return updateComment;
+}
+
 const getPostByComment = (postId) => {
     let data = getJsonPosts();
     return data.filter(x => x.id === parseInt(postId));
@@ -42,5 +54,6 @@ module.exports = {
     getCommentsByPost,
     getPostByComment,
     getCommentById,
-    save
+    save,
+    update
 }
