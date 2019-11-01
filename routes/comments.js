@@ -12,12 +12,23 @@ router.get('/',(req,res) => {
             if(fields == 'post'){
                 comments = comments.map((comment) => {
                     let post = repoComments.getPostByComment(comment.postId);
-                    return { ...comment, post};
+                    return { ...comment, post };
                 });
             }
         }
 
         res.send(comments);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+router.post('/', (req,res) => {
+    try {
+        const { body } = req;
+        const newComment = repoComments.save(body);
+        res.json(newComment);
+
     } catch (error) {
         res.status(500).send(error.message);
     }
