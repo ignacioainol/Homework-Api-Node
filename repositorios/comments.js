@@ -49,11 +49,21 @@ const getPostByComment = (postId) => {
     return data.filter(x => x.id === parseInt(postId));
 }
 
+const deleteComment = (commentId) => {
+    const comments = getJsonComments();
+    const commentDeleted = comments.filter((el) => el.id != commentId);
+
+    fs.writeFileSync(`./repositorios/data/comments.json`, JSON.stringify(commentDeleted,null,1));
+
+    return commentDeleted;
+}
+
 module.exports = {
     getAll,
     getCommentsByPost,
     getPostByComment,
     getCommentById,
     save,
-    update
+    update,
+    deleteComment
 }

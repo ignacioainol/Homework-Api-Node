@@ -60,10 +60,20 @@ router.put('/:id',(req,res) => {
         const { body } = req;
         const updateComment = repoComments.update(id,body);
         res.send(updateComment);
-        
+
     } catch (error) {
         res.status(500).send(error.message);
     }
 });
+
+router.delete('/:id', (req,res) => {    
+    try {
+        const { id } = req.params;
+        const deleteComment = repoComments.deleteComment(id);
+        res.send(deleteComment);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+})
 
 module.exports = router;
