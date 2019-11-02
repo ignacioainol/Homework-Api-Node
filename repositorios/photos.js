@@ -24,8 +24,20 @@ const save = (body) => {
 
 }
 
+const update = (photoId,body) => {
+    const photos = getData();
+    const index = photos.findIndex(x => x.id == photoId);
+
+    let updatePhoto = { ...photos[index], ...body };
+    photos.splice(index,1,updatePhoto);
+    fs.writeFileSync(`./repositorios/data/photos.json`, JSON.stringify(photos,null,1));
+
+    return updatePhoto;
+}
+
 module.exports = {
     getAll,
     getPhotoByAlbumId,
-    save
+    save,
+    update
 }

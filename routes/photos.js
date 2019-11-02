@@ -35,4 +35,16 @@ router.post('/', (req,res) => {
     }
 });
 
+router.put('/:id', (req,res) => {
+    try {
+        const { id } = req.params;
+        const { body } = req;
+
+        const updatedPhoto = repoPhotos.update(id, body);
+        res.send(updatedPhoto);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 module.exports = router;
