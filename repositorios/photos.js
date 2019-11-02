@@ -35,9 +35,19 @@ const update = (photoId,body) => {
     return updatePhoto;
 }
 
+const deletePhoto = (photoId) => {
+    const photos = getData();
+
+    const photoDeleted = photos.filter((x) => x.id != photoId);
+    fs.writeFileSync(`./repositorios/data/photos.json`, JSON.stringify(photoDeleted,null,1));
+
+    return photoDeleted;
+}
+
 module.exports = {
     getAll,
     getPhotoByAlbumId,
     save,
-    update
+    update,
+    deletePhoto
 }
