@@ -47,5 +47,15 @@ router.put('/:id',(req,res) => {
     }
 });
 
+router.delete('/:id', (req,res) => {
+    try {
+        const { id } = req.params;
+        const deleteAlbum = repoAlbums.deleteAlbum(id);
+        res.send(deleteAlbum);
+    } catch (error) {
+        res.status(500).send(error.message);        
+    }
+});
+
 
 module.exports = router;

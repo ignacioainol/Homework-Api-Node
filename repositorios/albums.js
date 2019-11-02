@@ -34,9 +34,19 @@ const update = (albumId,body) => {
     return updateAlbum;
 }
 
+const deleteAlbum = (albumId) => {
+    const albums = getData();
+
+    const albumDeleted = albums.filter((x) => x.id != albumId);
+    fs.writeFileSync(`./repositorios/data/albums.json`, JSON.stringify(albumDeleted,null,1));
+
+    return albumDeleted;
+}
+
 module.exports = {
     getAlbumsByUser,
     getAll,
     save,
-    update
+    update,
+    deleteAlbum
 }
