@@ -43,12 +43,6 @@ const deleteAlbum = (albumId) => {
     return albumDeleted;
 }
 
-// const getAlbumByPhoto = (albumId) => {
-//     let data = getData();
-//     return data.filter(x => x.id == albumId);
-//     //return albumId;
-// }
-
 const getAlbumByPhoto = (albumId) => {
     return getData().filter(x => x.id == albumId);
 }
