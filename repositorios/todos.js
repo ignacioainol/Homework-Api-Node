@@ -36,9 +36,19 @@ const update = (todoId, body) => {
     return updateTodo;
 }
 
+const deleteTodo = (todoId) => {
+    const todos = getData();
+
+    const todoDeleted = todos.filter((x) => x.id != todoId);
+    fs.writeFileSync(`./repositorios/data/todos.json`, JSON.stringify(todoDeleted,null,1));
+
+    return todoDeleted;
+}
+
 module.exports = {
     getTodoByUser,
     getAll,
     save,
-    update
+    update,
+    deleteTodo
 }
