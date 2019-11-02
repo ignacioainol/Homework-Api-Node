@@ -25,8 +25,20 @@ const save = (body) => {
 
 }
 
+const update = (todoId, body) => {
+    const todos = getData();
+
+    const index = todos.findIndex(x => x.id == todoId);
+    let updateTodo = { ...todos[index], ...body };
+    todos.splice(index,1,updateTodo);
+    fs.writeFileSync(`./repositorios/data/todos.json`, JSON.stringify(todos,null,1));
+
+    return updateTodo;
+}
+
 module.exports = {
     getTodoByUser,
     getAll,
-    save
+    save,
+    update
 }

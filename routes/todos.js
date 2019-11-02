@@ -33,4 +33,18 @@ router.post('/',(req,res) => {
     }
 });
 
+router.put('/:id', (req,res) => {
+    try {
+        const { id } = req.params;
+        const { body } = req;
+
+        const updatedTodo = repoTodos.update(id,body);
+
+        res.send(updatedTodo);
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 module.exports = router;
