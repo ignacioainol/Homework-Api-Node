@@ -13,7 +13,20 @@ const getTodoByUser = (userId) => {
     return data.filter(x => x.userId === parseInt(userId)) || undefined;
 }
 
+const save = (body) => {
+    const todos = getData();
+    const id = getData().length + 1;
+
+    const newTodo = {id, ...body};
+    todos.push(newTodo);
+    fs.writeFileSync('./repositorios/data/todos.json',JSON.stringify(todos));
+
+    return todos;
+
+}
+
 module.exports = {
     getTodoByUser,
-    getAll
+    getAll,
+    save
 }
