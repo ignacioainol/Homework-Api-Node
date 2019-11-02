@@ -24,8 +24,19 @@ const save = (body) => {
     return albums;
 }
 
+const update = (albumId,body) => {
+    const albums = getData();
+    const index = albums.findIndex(x => x.id == albumId);
+    let updateAlbum = { ...albums[index], ...body };
+    albums.splice(index,1,updateAlbum);
+    fs.writeFileSync(`./repositorios/data/albums.json`, JSON.stringify(albums,null,1));
+
+    return updateAlbum;
+}
+
 module.exports = {
     getAlbumsByUser,
     getAll,
-    save
+    save,
+    update
 }
