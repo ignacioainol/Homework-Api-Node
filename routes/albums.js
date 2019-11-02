@@ -23,5 +23,16 @@ router.get('/',(req,res) => {
     }
 });
 
+router.post('/', (req,res) => {
+    try {
+        const { body } = req;
+        const newAlbum = repoAlbums.save(body);
+
+        res.send(newAlbum);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 
 module.exports = router;

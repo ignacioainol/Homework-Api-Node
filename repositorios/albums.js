@@ -13,7 +13,19 @@ const getAlbumsByUser = (userId) => {
     return data.filter(x => x.userId === parseInt(userId)) || undefined;
 }
 
+const save = (body) => {
+    const id =  getData().length + 1;
+    const newAlbum = {id, ...body};
+
+    const albums = getData();
+    albums.push(newAlbum);
+    fs.writeFileSync('./repositorios/data/albums.json', JSON.stringify(albums,null,1));
+
+    return albums;
+}
+
 module.exports = {
     getAlbumsByUser,
-    getAll
+    getAll,
+    save
 }
