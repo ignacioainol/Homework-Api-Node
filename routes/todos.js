@@ -22,6 +22,26 @@ router.get('/', (req,res) => {
     }
 });
 
+router.get('/:id', (req,res) => {
+    try {
+        let todoId = req.params.id;
+        let todo = repoTodos.getTodoById(todoId);
+
+        if(req.query.fields != null){
+            let fields = req.query.fields;
+
+            if(fields == 'user'){
+                let user = repoUser.getUserById(todo.userId);
+                todo = {...todo, user};
+            }
+        }
+
+        res.send(todo);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 router.post('/',(req,res) => {
     try {
         const { body } = req;

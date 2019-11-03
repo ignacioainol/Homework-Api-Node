@@ -13,6 +13,11 @@ const getTodoByUser = (userId) => {
     return data.filter(x => x.userId === parseInt(userId)) || undefined;
 }
 
+const getTodoById = (todoId) => {
+    let todo = getData().find(x => x.id === parseInt(todoId));
+    return todo;
+}
+
 const save = (body) => {
     const todos = getData();
     const id = getData().length + 1;
@@ -50,5 +55,6 @@ module.exports = {
     getAll,
     save,
     update,
-    deleteTodo
+    deleteTodo,
+    getTodoById
 }
