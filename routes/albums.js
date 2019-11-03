@@ -23,6 +23,17 @@ router.get('/',(req,res) => {
     }
 });
 
+router.get('/:id', (req, res) => {
+    try {
+        const id = req.params.id;
+        let album = repoAlbums.getAlbumById(id);
+
+        res.send(album)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+})
+
 router.post('/', (req,res) => {
     try {
         const { body } = req;

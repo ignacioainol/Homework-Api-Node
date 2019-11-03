@@ -13,6 +13,10 @@ const getAlbumsByUser = (userId) => {
     return data.filter(x => x.userId === parseInt(userId)) || undefined;
 }
 
+const getAlbumById = (albumId) => {
+    return getData().find(x => x.id === parseInt(albumId));
+}
+
 const save = (body) => {
     const id =  getData().length + 1;
     const newAlbum = {id, ...body};
@@ -50,6 +54,7 @@ const getAlbumByPhoto = (albumId) => {
 module.exports = {
     getAlbumsByUser,
     getAll,
+    getAlbumById,
     save,
     update,
     deleteAlbum,
