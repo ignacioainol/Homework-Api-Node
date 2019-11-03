@@ -24,6 +24,26 @@ router.get('/', (req,res) => {
     }
 });
 
+router.get('/:id', (req,res) => {
+    try {
+        const id = req.params.id;
+        let photo = repoPhotos.getPhotoById(id);
+
+        if(req.query.fields != null){
+            let fields = req.query.fields;
+
+            if(fields == "album"){
+                let album = repoAlbums.getAlbumByPhoto(photo.albumId);
+                photo = {...photo, album};
+            }
+        }
+
+        res.send(photo);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 router.post('/', (req,res) => {
     try {
         const { body } = req;

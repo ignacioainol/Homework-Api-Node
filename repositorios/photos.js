@@ -44,10 +44,15 @@ const deletePhoto = (photoId) => {
     return photoDeleted;
 }
 
+const getPhotoById = (photoId) => {
+    return getData().find(x => x.id === parseInt(photoId));
+}
+
 module.exports = {
     getAll,
     getPhotoByAlbumId,
     save,
     update,
-    deletePhoto
+    deletePhoto,
+    getPhotoById
 }
