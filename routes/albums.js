@@ -28,6 +28,15 @@ router.get('/:id', (req, res) => {
         const id = req.params.id;
         let album = repoAlbums.getAlbumById(id);
 
+        if(req.query.fields != null){
+            let fields = req.query.fields;
+
+            if(fields == "photos"){
+                let photos = repoPhotos.getPhotoByAlbumId(album.id);
+                album = {...album, photos };
+            }
+        }
+
         res.send(album)
     } catch (error) {
         res.status(500).send(error.message);
