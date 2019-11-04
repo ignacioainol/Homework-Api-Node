@@ -1,8 +1,13 @@
 const router = require('express').Router();
+
+//get repos
 const repoUsers = require('./../repositorios/users');
 const repoPosts = require('./../repositorios/posts');
 const repoAlbums = require('./../repositorios/albums');
 const repoTodos = require('./../repositorios/todos');
+
+//validation
+const userValidation = require('./../validations/users.js');
 
 router.get('/', (req, res) => {
     try {
@@ -70,9 +75,16 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     try {
-        const { body } = req;
-        const newUser = repoUsers.save(body);
-        res.json(newUser);
+        const { body: user } = req;
+        const userErrors = userValidation.save(user);
+
+        if(userErrors){
+            res.status(400).send(userErrors);
+            return;
+        }
+        res.send("ok :D");
+        // const newUser = repoUsers.save(body);
+        // res.json(newUser);
 
     } catch (error) {
         res.status(500).send(error);
