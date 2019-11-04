@@ -1,3 +1,8 @@
+const verifyDotCom = (email) => {
+    let checkDotEmail = email.split('.').pop();
+    return (checkDotEmail == "cl" || checkDotEmail == "com") ? true: false;
+}
+
 const save = (user) => {
     const errors = {
         name: [],
@@ -33,9 +38,17 @@ const save = (user) => {
         errors.email.push("El campo email es requerido");
     }
     
+    if(email.trim().match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) == null){
+        errors.email.push("Debe ser un email válido");
+    }
+
+    if(!verifyDotCom(email)){
+        errors.email.push("El email debe ser .cl o .com");
+    }
     
     if(errors.name.length > 0 ||
-        errors.name.length > 0){
+        errors.username.length > 0 ||
+        errors.email.length > 0){
         return errors;
     }else{
         return undefined;
