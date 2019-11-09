@@ -3,7 +3,7 @@ const app = express();
 const routes = require('./routes/routes');
 
 //config
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4000);
 
 //middlewares
 app.use(express.urlencoded({ extended: true}));

@@ -82,12 +82,12 @@ router.post('/', (req, res) => {
             res.status(400).send(userErrors);
             return;
         }
-        res.send("ok :D");
-        // const newUser = repoUsers.save(body);
-        // res.json(newUser);
+        //res.send("ok :D");
+         const newUser = repoUsers.save(user);
+        res.json(newUser);
 
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send(error.message);
     }
 });
 
