@@ -2,6 +2,9 @@ const router = require('express').Router();
 const repoPosts = require('./../repositorios/posts');
 const repoComments = require('./../repositorios/comments');
 
+//comments validation
+const commentValidation = require('./../validations/comments');
+
 router.get('/',(req,res) => {
     try {
         let comments = repoComments.getAll();
@@ -46,6 +49,14 @@ router.get('/:id',(req,res) => {
 router.post('/', (req,res) => {
     try {
         const { body } = req;
+
+        const commentErrors = commentValidation.saveAndUpdate(body);
+
+        if(commentErrors){
+            res.status(400).send(commentErrors);
+            return;
+        }
+
         const newComment = repoComments.save(body);
         res.json(newComment);
 
@@ -58,6 +69,14 @@ router.put('/:id',(req,res) => {
     try {
         const { id } = req.params;
         const { body } = req;
+
+        const commentErrors = commentValidation.saveAndUpdate(body);
+
+        if(commentErrors){
+            res.status(400).send(commentErrors);
+            return;
+        }
+
         const updateComment = repoComments.update(id,body);
         res.send(updateComment);
 
