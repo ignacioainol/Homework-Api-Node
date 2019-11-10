@@ -2,6 +2,9 @@ const router = require('express').Router();
 const repoAlbums = require('./../repositorios/albums');
 const repoPhotos = require('./../repositorios/photos');
 
+//album validations
+const albumValidation = require('./../validations/albums');
+
 router.get('/',(req,res) => {
     try {
         let albums = repoAlbums.getAll();
@@ -46,8 +49,15 @@ router.get('/:id', (req, res) => {
 router.post('/', (req,res) => {
     try {
         const { body } = req;
-        const newAlbum = repoAlbums.save(body);
 
+        const albumErrors = albumValidation.saveAndUpdate(body);
+
+        if(albumErrors){
+            res.status(400).send(albumErrors);
+            return;
+        }
+
+        const newAlbum = repoAlbums.save(body);
         res.send(newAlbum);
     } catch (error) {
         res.status(500).send(error.message);
@@ -59,8 +69,14 @@ router.put('/:id',(req,res) => {
         const { id } = req.params;
         const { body } = req;
 
-        const updateAlbum = repoAlbums.update(id,body);
+        const albumErrors = albumValidation.saveAndUpdate(body);
 
+        if(albumErrors){
+            res.status(400).send(albumErrors);
+            return;
+        }
+
+        const updateAlbum = repoAlbums.update(id,body);
         res.send(updateAlbum);
     } catch (error) {
         res.status(500).send(error.message);
