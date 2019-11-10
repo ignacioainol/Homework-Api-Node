@@ -3,7 +3,7 @@ const verifyDotCom = (email) => {
     return (checkDotEmail == "cl" || checkDotEmail == "com") ? true: false;
 }
 
-const save = (user) => {
+const saveAndUpdate = (user) => {
     const errors = {
         name: [],
         username: [],
@@ -16,38 +16,39 @@ const save = (user) => {
     const {name, username,email,address,phone, website, company} = user;
 
     //name validations
-    if(!name.trim()){
+    if(!name){
         errors.name.push("El campo name es requerido");
+    }else{
+        if(name.trim().length < 9 || name.trim().length > 50){
+            errors.name.push("El campo name debe tener entre 10 a 50 caracteres");
+        }
     }
 
-    if(name.trim().length < 9 || name.trim().length > 50){
-        errors.name.push("El campo name debe tener entre 10 a 50 caracteres");
-    }
 
     //username validations
-    if(!username.trim()){
+    if(!username){
         errors.username.push("El campo username es requerido");
-    }
-
-    if(username.trim().length < 9 || username.trim().length > 50){
-        errors.username.push("El campo username debe tener entre 10 a 50 caracteres");
+    }else{
+        if(username.trim().length < 9 || username.trim().length > 50){
+            errors.username.push("El campo username debe tener entre 10 a 50 caracteres");
+        }
     }
 
     //email validations
-    if(!email.trim()){
+    if(!email){
         errors.email.push("El campo email es requerido");
-    }
-
-    if(email.trim().length < 9 || email.trim().length > 50){
-        errors.email.push("El campo email debe tener entre 10 a 50 caracteres");
-    }
+    }else{
+        if(email.trim().length < 9 || email.trim().length > 50){
+            errors.email.push("El campo email debe tener entre 10 a 50 caracteres");
+        }
+        
+        if(email.trim().match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) == null){
+            errors.email.push("Debe ser un email válido");
+        }
     
-    if(email.trim().match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) == null){
-        errors.email.push("Debe ser un email válido");
-    }
-
-    if(!verifyDotCom(email)){
-        errors.email.push("El email debe ser .cl o .com");
+        if(!verifyDotCom(email)){
+            errors.email.push("El email debe ser .cl o .com");
+        }
     }
 
     // //address validations
@@ -108,16 +109,20 @@ const save = (user) => {
     }
 
     //Phonenumber validations
-    if(phone.trim().length < 10 || phone.trim().length > 30){
-        errors.phone.push("El campo teléfono debe tener entre 10 a 30 caracteres");
-    }
-
-    if(phone.trim().match(/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/) == null){
-        errors.phone.push("En numero ingresado no es correcto");
+    if(!phone){
+        errors.phone.push("El campo phone es requerido")
+    }else{
+        if(phone.trim().length < 10 || phone.trim().length > 30){
+            errors.phone.push("El campo teléfono debe tener entre 10 a 30 caracteres");
+        }
+    
+        if(phone.trim().match(/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/) == null){
+            errors.phone.push("En numero ingresado no es correcto");
+        }
     }
 
     //website validations
-    if(!website.trim()){
+    if(!website){
         errors.website.push("El campo website es requerido");
     }else{
         if(website.trim().length < 10 || website.trim().length > 50){
@@ -159,7 +164,7 @@ const save = (user) => {
         errors.email.length > 0 ||
         errors.address.length > 0 ||
         errors.phone.length > 0 ||
-        errors.website.length > 0){
+        errors.company.length > 0){
         return errors;
     }else{
         return undefined;
@@ -167,5 +172,5 @@ const save = (user) => {
 }
 
 module.exports = {
-    save
+    saveAndUpdate
 }

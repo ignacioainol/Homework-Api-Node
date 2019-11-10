@@ -76,14 +76,14 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     try {
         const { body: user } = req;
-        const userErrors = userValidation.save(user);
+        const userErrors = userValidation.saveAndUpdate(user);
 
         if(userErrors){
             res.status(400).send(userErrors);
             return;
         }
-        //res.send("ok :D");
-         const newUser = repoUsers.save(user);
+
+        const newUser = repoUsers.save(user);
         res.json(newUser);
 
     } catch (error) {
@@ -95,6 +95,12 @@ router.put('/:id',(req,res) => {
     try {
         const { id } = req.params;
         const { body } = req;
+        const userErrors = userValidation.saveAndUpdate(body);
+
+        if(userErrors){
+            res.status(400).send(userErrors);
+            return;
+        }
 
         const updateUser = repoUsers.update(id,body);
         res.send(updateUser);
