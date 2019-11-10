@@ -2,6 +2,9 @@ const router = require('express').Router();
 const repoPhotos = require('./../repositorios/photos');
 const repoAlbums = require('./../repositorios/albums');
 
+//validations photo
+const photoValidation = require('./../validations/photos');
+
 router.get('/', (req,res) => {
     try {
         let photos = repoPhotos.getAll();
@@ -47,6 +50,14 @@ router.get('/:id', (req,res) => {
 router.post('/', (req,res) => {
     try {
         const { body } = req;
+        
+        const photoErrors = photoValidation.saveAndUpdate(body);
+
+        if(photoErrors){
+            res.status(400).send(photoErrors);
+            return;
+        }
+
         const newPhoto = repoPhotos.save(body);
 
         res.send(newPhoto);
@@ -59,6 +70,13 @@ router.put('/:id', (req,res) => {
     try {
         const { id } = req.params;
         const { body } = req;
+
+        const photoErrors = photoValidation.saveAndUpdate(body);
+
+        if(photoErrors){
+            res.status(400).send(photoErrors);
+            return;
+        }
 
         const updatedPhoto = repoPhotos.update(id, body);
         res.send(updatedPhoto);
