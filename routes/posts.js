@@ -3,6 +3,9 @@ const repoUsers = require('./../repositorios/users');
 const repoPosts = require('./../repositorios/posts');
 const repoComments = require('./../repositorios/comments');
 
+//validation
+const postValidation = require('./../validations/posts.js');
+
 router.get('/',(req,res) => {
     try {
         let posts = repoPosts.getAll();
@@ -34,11 +37,19 @@ router.get('/',(req,res) => {
 router.post('/', (req,res) => {
     try {
         const { body } = req;
+
+        const postErrors = postValidation.saveAndUpdate(body);
+
+        if(postErrors){
+            res.status(400).send(postErrors);
+            return;
+        }
+
         const newPost = repoPosts.save(body);
         res.json(newPost);
 
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send(error.message);
     }
 });
 
@@ -79,6 +90,13 @@ router.put('/:id', (req,res) => {
     try {
         const { id } = req.params;
         const { body } = req;
+
+        const postErrors = postValidation.saveAndUpdate(body);
+
+        if(postErrors){
+            res.status(400).send(postErrors);
+            return;
+        }
 
         const updatePost = repoPosts.update(id,body);
         res.send(updatePost);
