@@ -2,6 +2,9 @@ const router = require('express').Router();
 const repoTodos = require('./../repositorios/todos');
 const repoUser = require('./../repositorios/users');
 
+//validations todo
+const todoValidation = require('./../validations/todos');
+
 router.get('/', (req,res) => {
     try {
         let todos = repoTodos.getAll();
@@ -45,8 +48,14 @@ router.get('/:id', (req,res) => {
 router.post('/',(req,res) => {
     try {
         const { body } = req;
-        const newTodo = repoTodos.save(body);
+        const todoErrors = todoValidation.saveAndUpdate(body);
 
+        if(todoErrors){
+            res.status(400).send(todoErrors);
+            return;
+        }
+
+        const newTodo = repoTodos.save(body);
         res.send(newTodo);
     } catch (error) {
         res.status(500).send(error.message);
@@ -57,6 +66,13 @@ router.put('/:id', (req,res) => {
     try {
         const { id } = req.params;
         const { body } = req;
+
+        const todoErrors = todoValidation.saveAndUpdate(body);
+
+        if(todoErrors){
+            res.status(400).send(todoErrors);
+            return;
+        }
 
         const updatedTodo = repoTodos.update(id,body);
 
