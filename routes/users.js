@@ -37,7 +37,8 @@ router.get('/', (req, res) => {
             }
         }
 
-        res.send(users);
+        res.status(200).send(users);
+
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -67,7 +68,11 @@ router.get('/:id', (req, res) => {
                 }
         }
 
-        res.send(user);
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(404).send();
+        }
     } catch (error) {
         res.status(500).send(error.message);
     }

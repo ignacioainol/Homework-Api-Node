@@ -3,6 +3,7 @@ const { assert } = require("chai");
 const apiClientBaseUrl = "/v1/users";
 
 describe("Users API", () => {
+    // [users post]
     it("No debe guardar usuario (1)", async () => {
         try {
             const obj = {
@@ -110,5 +111,61 @@ describe("Users API", () => {
             return Promise.reject(error)
         }
     })
+    // [/users post]
+
+    // [users get]
+    it("Debe obtener usuarios", async () => {
+        try {
+            const response = await apiClient
+                .get(apiClientBaseUrl)
+                .expect(200);
+
+            const { body } = response;
+
+            assert.isArray(body, "No es array");
+            assert.isNotEmpty(body, "Esta vacio");
+
+            const obj = body[0];
+            const props = ["id", "name", "username", "email","address","company","phone","website"];
+            assert.hasAllKeys(obj, props);
+
+            return Promise.resolve()
+        } catch (error) {
+            return Promise.reject(error)
+        }
+    });
+
+    it("Debe obtener usuario por ID", async () => {
+        const userId = 1;
+        try {
+            const response = await apiClient
+                .get(`${apiClientBaseUrl}/${userId}`)
+                .expect(200);
+
+            const { body } = response;
+            assert.isObject(body, "No es object");
+            const props = ["id", "name", "username", "email","address","company","phone","website"];
+            assert.hasAllKeys(body, props);
+
+            return Promise.resolve()
+        } catch (error) {
+            return Promise.reject(error)
+        }
+    });
+
+    it("No debe encontrar usuario por ID", async () => {
+        const userId = 10000;
+        try {
+            const response = await apiClient
+                .get(`${apiClientBaseUrl}/${userId}`)
+                .expect(404);
+
+            return Promise.resolve();
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    })
+    // [/users get]
+
 
 });
