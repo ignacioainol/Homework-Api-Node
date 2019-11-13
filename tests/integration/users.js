@@ -7,7 +7,7 @@ describe("Users API", () => {
     it("No debe guardar usuario (1)", async () => {
         try {
             const obj = {
-                "name": "Leanne",
+                "name": "",
                 "username": "Bret",
                 "email": "Sincere@april.biz",
                 "address": {
