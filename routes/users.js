@@ -84,7 +84,7 @@ router.post('/', (req, res) => {
         }
 
         const newUser = repoUsers.save(user);
-        res.json(newUser);
+        res.status(201).send(newUser);
 
     } catch (error) {
         res.status(500).send(error.message);
