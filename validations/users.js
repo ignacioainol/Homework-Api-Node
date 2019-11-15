@@ -117,7 +117,7 @@ const saveAndUpdate = (user) => {
         }
     
         if(phone.trim().match(/[0-9-]+$/) == null){
-            errors.phone.push("En numero ingresado no es correcto");
+            errors.phone.push("El numero ingresado no es correcto");
         }
     }
 
@@ -137,7 +137,7 @@ const saveAndUpdate = (user) => {
         if(!company.name){
             errors.company.push("El campo name de company es requerido");
         }else{
-            if(company.name.trim().length < 10 || website.trim().length > 50){
+            if(company.name.trim().length < 10 || company.name.trim().length > 50){
                 errors.company.push("El campo name de company debe tener entre 10 a 30 caracteres");
             }
         }
@@ -164,6 +164,7 @@ const saveAndUpdate = (user) => {
         errors.email.length > 0 ||
         errors.address.length > 0 ||
         errors.phone.length > 0 ||
+        errors.website.length > 0 ||
         errors.company.length > 0){
         return errors;
     }else{

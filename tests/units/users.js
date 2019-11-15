@@ -532,7 +532,7 @@ describe("Users Validator", () => {
 
                const errors = userValidator.saveAndUpdate(obj);
                assert.isDefined(errors, "Es undefined");
-               assert.isArray(errors.address, "address no es array");
+               assert.isArray(errors.phone, "phone no es array");
 
         } catch (error) {
             return Promise.reject(error);
@@ -555,7 +555,7 @@ describe("Users Validator", () => {
                      "lng": "81.1496"
                     }
                 },
-                "phone": "asdasdasasdasdasdas",
+                "phone": "123456789",
                 "website": "https://hildegard.org",
                 "company": {
                  "name": "Roma Roma :D",
@@ -572,6 +572,239 @@ describe("Users Validator", () => {
             return Promise.reject(error);
         }
     });
-    
+
+    it("El numero ingresado no es correcto", () => {
+        try {
+            const obj = {
+                "name": "Billy Idol",
+                "username": "Lo que sea",
+                "email": "Sincere@april.cl",
+                "address": {
+                    "street": "aaaaaaaaaaaaa",
+                    "suite": "Charles Gaulle",
+                    "city": "Big City Night",
+                    "zipcode": "56238472332",
+                    "geo": {
+                     "lat": "81.1496",
+                     "lng": "81.1496"
+                    }
+                },
+                "phone": "asdaaaasdadas",
+                "website": "https://hildegard.org",
+                "company": {
+                 "name": "Roma Roma :D",
+                 "catchPhrase": "Multi Todooo",
+                 "bs": "harness Buenos Aires"
+                }
+               }
+
+               const errors = userValidator.saveAndUpdate(obj);
+               assert.isDefined(errors, "Es undefined");
+               assert.isArray(errors.phone, "phone no es array");
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    });   
+
+    it("El campo website es requerido", () => {
+        try {
+            const obj = {
+                "name": "Billy Idol",
+                "username": "Lo que sea",
+                "email": "Sincere@april.cl",
+                "address": {
+                    "street": "aaaaaaaaaaaaa",
+                    "suite": "Charles Gaulle",
+                    "city": "Big City Night",
+                    "zipcode": "56238472332",
+                    "geo": {
+                     "lat": "81.1496",
+                     "lng": "81.1496"
+                    }
+                },
+                "phone": "98792837-28",
+                "website": " ",
+                "company": {
+                 "name": "Roma Roma :D",
+                 "catchPhrase": "Multi Todooo",
+                 "bs": "harness Buenos Aires"
+                }
+               }
+
+               const errors = userValidator.saveAndUpdate(obj);
+               assert.isDefined(errors, "Es undefined");
+               assert.isArray(errors.website, "website no es array");
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    });
+
+    it("El campo website debe tener entre 10 a 30 caracteres", () => {
+        try {
+            const obj = {
+                "name": "Billy Idol",
+                "username": "Lo que sea",
+                "email": "Sincere@april.cl",
+                "address": {
+                    "street": "aaaaaaaaaaaaa",
+                    "suite": "Charles Gaulle",
+                    "city": "Big City Night",
+                    "zipcode": "56238472332",
+                    "geo": {
+                     "lat": "81.1496",
+                     "lng": "81.1496"
+                    }
+                },
+                "phone": "12345678910",
+                "website": "https://",
+                "company": {
+                 "name": "Roma Roma :D",
+                 "catchPhrase": "Multi Todooo",
+                 "bs": "harness Buenos Aires"
+                }
+               }
+
+               const errors = userValidator.saveAndUpdate(obj);
+               assert.isDefined(errors, "Es undefined");
+               assert.isArray(errors.website, "website no es array");
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    });
+
+    it("El campo company es requerido", () => {
+        try {
+            const obj = {
+                "name": "Billy Idol",
+                "username": "Lo que sea",
+                "email": "Sincere@april.cl",
+                "address": {
+                    "street": "aaaaaaaaaaaaa",
+                    "suite": "Charles Gaulle",
+                    "city": "Big City Night",
+                    "zipcode": "56238472332",
+                    "geo": {
+                     "lat": "81.1496",
+                     "lng": "81.1496"
+                    }
+                },
+                "phone": "12345678910",
+                "website": "https://www.nose.cl",
+                "company": ""
+               }
+
+               const errors = userValidator.saveAndUpdate(obj);
+               assert.isDefined(errors, "Es undefined");
+               assert.isArray(errors.company, "company no es array");
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    });
+
+    it("El campo name de company es requerido", () => {
+        try {
+            const obj = {
+                "name": "Billy Idol",
+                "username": "Lo que sea",
+                "email": "Sincere@april.cl",
+                "address": {
+                    "street": "aaaaaaaaaaaaa",
+                    "suite": "Charles Gaulle",
+                    "city": "Big City Night",
+                    "zipcode": "56238472332",
+                    "geo": {
+                     "lat": "81.1496",
+                     "lng": "81.1496"
+                    }
+                },
+                "phone": "12345678910",
+                "website": "https://www.nose.cl",
+                "company": {
+                    "name": " ",
+                    "catchPhrase": "Multi Todooo",
+                    "bs": "harness Buenos Aires"
+                   }
+               }
+
+               const errors = userValidator.saveAndUpdate(obj);
+               assert.isDefined(errors, "Es undefined");
+               assert.isArray(errors.company, "company no es array");
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    });
+
+    it("El campo catchPhrase de company es requerido", () => {
+        try {
+            const obj = {
+                "name": "Billy Idol",
+                "username": "Lo que sea",
+                "email": "Sincere@april.cl",
+                "address": {
+                    "street": "aaaaaaaaaaaaa",
+                    "suite": "Charles Gaulle",
+                    "city": "Big City Night",
+                    "zipcode": "56238472332",
+                    "geo": {
+                     "lat": "81.1496",
+                     "lng": "81.1496"
+                    }
+                },
+                "phone": "12345678910",
+                "website": "https://www.nose.cl",
+                "company": {
+                    "name": "Multi Todooo",
+                    "catchPhrase": "   ",
+                    "bs": "harness Buenos Aires"
+                   }
+               }
+
+               const errors = userValidator.saveAndUpdate(obj);
+               assert.isDefined(errors, "Es undefined");
+               assert.isArray(errors.company, "company no es array");
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    });
+
+    it("El campo bs de company es requerido", () => {
+        try {
+            const obj = {
+                "name": "Billy Idol",
+                "username": "Lo que sea",
+                "email": "Sincere@april.cl",
+                "address": {
+                    "street": "aaaaaaaaaaaaa",
+                    "suite": "Charles Gaulle",
+                    "city": "Big City Night",
+                    "zipcode": "56238472332",
+                    "geo": {
+                     "lat": "81.1496",
+                     "lng": "81.1496"
+                    }
+                },
+                "phone": "12345678910",
+                "website": "https://www.nose.cl",
+                "company": {
+                    "name": "Multi Todooo",
+                    "catchPhrase": "harness Buenos Aires",
+                    "bs": "    "
+                   }
+               }
+
+               const errors = userValidator.saveAndUpdate(obj);
+               assert.isDefined(errors, "Es undefined");
+               assert.isArray(errors.company, "company no es array");
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    });
 
 });
