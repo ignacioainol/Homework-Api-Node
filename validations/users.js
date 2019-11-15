@@ -116,7 +116,7 @@ const saveAndUpdate = (user) => {
             errors.phone.push("El campo teléfono debe tener entre 10 a 30 caracteres");
         }
     
-        if(phone.trim().match(/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/) == null){
+        if(phone.trim().match(/[0-9-]+$/) == null){
             errors.phone.push("En numero ingresado no es correcto");
         }
     }
