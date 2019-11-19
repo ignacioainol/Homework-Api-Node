@@ -10,6 +10,10 @@ const saveAndUpdate = (post) => {
     //userId validation
     if(!userId){
         errors.userId.push("El campo userId es requerido");
+    }else{
+        if(userId == ""){
+            errors.userId.push("El campo userId debe tener algun valor");
+        }
     }
 
     //title validations

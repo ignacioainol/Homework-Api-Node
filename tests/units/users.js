@@ -65,7 +65,6 @@ describe("Users Validator", () => {
                const errors = userValidator.saveAndUpdate(obj);
                assert.isDefined(errors, "Es undefined");
                assert.isArray(errors.name, "name no es array");
-               assert.isArray(errors.username, "username no es array");
 
         } catch (error) {
             return Promise.reject(error);
