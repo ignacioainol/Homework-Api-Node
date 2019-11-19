@@ -16,6 +16,10 @@ const saveAndUpdate = (comment) => {
     //postId validation
     if(!postId){
         errors.postId.push("El campo postId es requerido");
+    }else{
+        if(postId == ""){
+            errors.postId.push("El campo postId debe tener algun valor numerico");
+        }
     }
 
     //name validations
