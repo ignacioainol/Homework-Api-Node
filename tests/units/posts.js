@@ -5,7 +5,7 @@ describe("Posts Validator", () => {
     it("El campo userId es requerido", () => {
         try {
             const obj = {
-                "userId": "",
+                "userId": '',
                 "title": "shot in the daark (8)",
                 "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
               }

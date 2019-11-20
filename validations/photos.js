@@ -15,6 +15,10 @@ const saveAndUpdate = (photo) => {
     //album id validation
     if(!albumId){
         errors.albumId.push("El campo albumId es requerido");
+    }else{
+        if(albumId.toString().trim() == ""){
+            errors.albumId.push("El campo albumId es requerido");
+        }
     }
 
     //title validations
@@ -45,12 +49,11 @@ const saveAndUpdate = (photo) => {
     }else{
         if(thumbnailUrl.trim().length < 10 || thumbnailUrl.trim().length > 50){
             errors.thumbnailUrl.push("El campo thumbnailUrl debe contener entre 10 y 50 caracteres");
+        }else{
+            if(!checkIfBeginsWithHttps(thumbnailUrl.trim())){
+                errors.thumbnailUrl.push("El campo thumbnailUrl debe comenzar con https://");
+            }
         }
-
-        if(!checkIfBeginsWithHttps(thumbnailUrl.trim())){
-            errors.thumbnailUrl.push("El campo thumbnailUrl debe comenzar con https://");
-        }
-
     }
 
     if(errors.albumId.length > 0 ||
