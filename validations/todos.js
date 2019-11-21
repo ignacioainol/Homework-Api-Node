@@ -5,30 +5,31 @@ const saveAndUpdate = (todo) => {
         completed: []
     }
 
+    function isEmpty(str) {
+        return (!str || 0 === str.length || str.toString().trim() == "");
+    }
+
     const {userId, title, completed} = todo;
 
     //useriD validations
-    if(!userId){
+    if(!userId || userId.toString().trim() ==  ""){
         errors.userId.push("El campo userId es requerido");
     }
 
     //title validations
-    if(!title){
+    if(title.trim() == "" || !title){
         errors.title.push("El campo title es requerido");
-    }else{
-        if(title.trim().length < 10 || title.trim().length > 50){
-            errors.title.push("El campo title debe contener entre 10 y 50 caracteres");
-        }
     }
 
     //completed validations
-    if(!completed){
+    if(!isEmpty(completed)) {
         errors.completed.push("El campo completed es requerido");
-    }else{
-        if(typeof completed != "boolean"){
-            errors.completed.push("El campo completed debe ser booleano");
-        }
     }
+    // else{
+    //     if( typeof completed != "boolean")){
+    //         errors.completed.push("El campo completed debe ser booleano");
+    //     }
+    // }
 
 
     if(errors.userId.length > 0 ||
