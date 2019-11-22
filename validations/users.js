@@ -29,7 +29,7 @@ const saveAndUpdate = (user) => {
     if(!username){
         errors.username.push("El campo username es requerido");
     }else{
-        if(username.trim().length < 9 || username.trim().length > 50){
+        if(username.trim().length < 10 || username.trim().length > 50){
             errors.username.push("El campo username debe tener entre 10 a 50 caracteres");
         }
     }
@@ -89,37 +89,39 @@ const saveAndUpdate = (user) => {
 
         if(!address.geo){
             errors.address.push("El campo geo es requerido");
-        }else{
-            if(!address.geo.lat){
-                errors.address.push("El campo lat es requerido");
-            }else{
-                if(address.geo.lat.length < 7 || address.geo.lat.length > 50){
-                    errors.address.push("El campo lat debe tener entre 7 a 50 caracteres");
-                }
-            }
-
-            if(!address.geo.lng){
-                errors.address.push("El campo lng es requerido");
-            }else{
-                if(address.geo.lng.length < 7 || address.geo.lng.length > 50){
-                    errors.address.push("El campo lng debe tener entre 7 a 50 caracteres");
-                }
-            }
         }
+        
+        // else{
+        //     if(!address.geo.lat){
+        //         errors.address.push("El campo lat es requerido");
+        //     }else{
+        //         if(address.geo.lat.length < 7 || address.geo.lat.length > 50){
+        //             errors.address.push("El campo lat debe tener entre 7 a 50 caracteres");
+        //         }
+        //     }
+
+        //     if(!address.geo.lng){
+        //         errors.address.push("El campo lng es requerido");
+        //     }else{
+        //         if(address.geo.lng.length < 7 || address.geo.lng.length > 50){
+        //             errors.address.push("El campo lng debe tener entre 7 a 50 caracteres");
+        //         }
+        //     }
+        // }
     }
 
     //Phonenumber validations
-    if(!phone){
+    if (!phone) {
         errors.phone.push("El campo phone es requerido")
-    }else{
-        if(phone.trim().length < 10 || phone.trim().length > 30){
-            errors.phone.push("El campo teléfono debe tener entre 10 a 30 caracteres");
+    } else {
+        if (phone.trim().length < 10 || phone.trim().length > 30) {
+            errors.phone.push("El campo phone debe tener entre 10 y 30 caracteres");
         }
-    
-        if(phone.trim().match(/[0-9-]+$/) == null){
+        if (/[^0-9|-]/g.test(phone)) {
             errors.phone.push("El numero ingresado no es correcto");
         }
     }
+
 
     //website validations
     if(!website){
