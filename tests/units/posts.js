@@ -6,7 +6,7 @@ describe("Posts Validator", () => {
         try {
             const obj = {
                 "userId": '',
-                "title": "shot in the daark (8)",
+                "title": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
                 "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
               }
 
@@ -23,7 +23,7 @@ describe("Posts Validator", () => {
         try {
             const obj = {
                 "userId": 1,
-                "title": "           ",
+                "title": "  ",
                 "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
               }
 
@@ -39,7 +39,7 @@ describe("Posts Validator", () => {
         try {
             const obj = {
                 "userId": 1,
-                "title": "lorem ipsum bla bla bla",
+                "title": "quia et suscipit\nsuscipit",
                 "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
               }
 
@@ -56,7 +56,7 @@ describe("Posts Validator", () => {
             const obj = {
                 "userId": 1,
                 "title": "Wise man said just walk this way To the dawn of the light The wind will blow into your face As the years pass you by Hear this voice from deep inside",
-                "body": "               "
+                "body": "   ",
               }
 
               const errors = postValidator.saveAndUpdate(obj);
@@ -71,8 +71,8 @@ describe("Posts Validator", () => {
         try {
             const obj = {
                 "userId": 1,
-                "title": "Wise man said just walk this way To the dawn of the light The wind will blow into your face As the years pass you by Hear this voice from deep inside",
-                "body": "It's the call of your heart Close your eyes and you will find"
+                "title": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+                "body": "quia et suscipit\nsuscipit recusandae"
               }
 
               const errors = postValidator.saveAndUpdate(obj);
