@@ -6,7 +6,7 @@ describe("Comments Validator", () => {
         try {
             const obj = {
                 "postId": '',
-                "name": "post updated",
+                "name": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
                 "email": "ignacio@gardner.cl",
                 "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
               }
@@ -25,7 +25,7 @@ describe("Comments Validator", () => {
         try {
             const obj = {
                 "postId": '12',
-                "name": "post updated",
+                "name": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
                 "email": "ignacio@gardner.cl",
                 "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
               }
@@ -44,7 +44,7 @@ describe("Comments Validator", () => {
         try {
             const obj = {
                 "postId": 12,
-                "name": "   ",
+                "name": "  ",
                 "email": "ignacio@gardner.cl",
                 "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
               }
@@ -82,8 +82,8 @@ describe("Comments Validator", () => {
         try {
             const obj = {
                 "postId": 12,
-                "name": "Cause you, you're walking on the edge You, you chose the way of love and pain ",
-                "email": "   ",
+                "name": "Cause you, you're walking on the edge You, you chose the way of love and pain laudantium enim quasi est quidem magnam voluptate ipsam  ",
+                "email": "    ",
                 "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
               }
 

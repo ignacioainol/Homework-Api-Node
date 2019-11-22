@@ -17,7 +17,7 @@ const saveAndUpdate = (comment) => {
     if(!postId){
         errors.postId.push("El campo postId es requerido");
     }else{
-        if(postId == ""){
+        if(typeof postId != "number"){
             errors.postId.push("El campo postId debe tener algun valor numerico");
         }
     }
