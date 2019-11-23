@@ -1,5 +1,5 @@
 const checkIfBeginsWithHttps = (url) => {
-    return url.startsWith('https://')  ? true : false;
+    return url.startsWith('https://')  ? "true" : "false";
 }
 
 const saveAndUpdate = (photo) => {
@@ -13,12 +13,8 @@ const saveAndUpdate = (photo) => {
     const {albumId,title, url,thumbnailUrl} = photo;
 
     //album id validation
-    if(!albumId){
+    if(!albumId || albumId.toString().trim() == ""){
         errors.albumId.push("El campo albumId es requerido");
-    }else{
-        if(albumId.toString().trim() == ""){
-            errors.albumId.push("El campo albumId es requerido");
-        }
     }
 
     //title validations
@@ -31,30 +27,40 @@ const saveAndUpdate = (photo) => {
     }
 
     //url validations
-    if(!url){
+    if(!url || url.trim() == ""){
         errors.url.push("El campo url es requerido");
     }else{
         if(url.trim().length < 10 || url.trim().length > 50){
             errors.url.push("El campo url debe contener entre 10 y 50 caracteres");
+        }else{
+            if(checkIfBeginsWithHttps(url.trim()) == "false"){
+                errors.url.push("El campo url debe comenzar con https://");
+            }
         }
-
-        if(!checkIfBeginsWithHttps(url.trim())){
-            errors.url.push("El campo url debe comenzar con https://");
-        }
-
     }
+
     //thumbnail validations
-    if(!thumbnailUrl){
+    if(!thumbnailUrl || thumbnailUrl.trim() == ""){
         errors.thumbnailUrl.push("El campo thumbnail es requerido");
     }else{
         if(thumbnailUrl.trim().length < 10 || thumbnailUrl.trim().length > 50){
             errors.thumbnailUrl.push("El campo thumbnailUrl debe contener entre 10 y 50 caracteres");
         }else{
-            if(!checkIfBeginsWithHttps(thumbnailUrl.trim())){
+            if(checkIfBeginsWithHttps(thumbnailUrl.trim()) == "false"){
                 errors.thumbnailUrl.push("El campo thumbnailUrl debe comenzar con https://");
             }
         }
     }
+    // else{
+    //     if(thumbnailUrl.trim().length < 10 || thumbnailUrl.trim().length > 50){
+    //         errors.thumbnailUrl.push("El campo thumbnailUrl debe contener entre 10 y 50 caracteres");
+    //     }else{
+    //         if(checkIfBeginsWithHttps(thumbnailUrl.trim()) == "false"){
+    //             errors.thumbnailUrl.push("El campo thumbnailUrl debe comenzar con https://");
+    //         }
+    //     }
+    // }
+
 
     if(errors.albumId.length > 0 ||
         errors.title.length > 0 ||

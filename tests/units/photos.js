@@ -23,7 +23,7 @@ describe("Photos Validator", () => {
         try {
             const obj = {
                 "albumId": 12,
-                "title": "",
+                "title": "aasasd",
                 "url": "https://via.placeholder.com/600/92c952",
                 "thumbnailUrl": "https://via.placeholder.com/150/92c952"
             }
@@ -40,7 +40,7 @@ describe("Photos Validator", () => {
         try {
             const obj = {
                 "albumId": 12,
-                "title": "heroes",
+                "title": "silencio",
                 "url": "https://via.placeholder.com/600/92c952",
                 "thumbnailUrl": "https://via.placeholder.com/150/92c952"
             }
@@ -58,12 +58,12 @@ describe("Photos Validator", () => {
             const obj = {
                 "albumId": 12,
                 "title": "heroesdelsilencio",
-                "url": "",
+                "url": "ssasdssd",
                 "thumbnailUrl": "https://via.placeholder.com/150/92c952"
             }
 
             const errors = photoValidator.saveAndUpdate(obj);
-            assert.isDefined(errors, "Es undefined");
+            assert.isDefined(errors.url, "Es undefined");
             assert.isArray(errors.url, "url no es array");
         } catch (error) {
             return Promise.reject(error);
@@ -75,7 +75,7 @@ describe("Photos Validator", () => {
             const obj = {
                 "albumId": 12,
                 "title": "heroesdelsilencio",
-                "url": "aaassd",
+                "url": "aaaaaaa",
                 "thumbnailUrl": "https://via.placeholder.com/150/92c952"
             }
 
@@ -92,7 +92,7 @@ describe("Photos Validator", () => {
             const obj = {
                 "albumId": 12,
                 "title": "heroesdelsilencio",
-                "url": "aaassd",
+                "url": "www.google.cl",
                 "thumbnailUrl": "https://via.placeholder.com/150/92c952"
             }
 
@@ -110,11 +110,11 @@ describe("Photos Validator", () => {
                 "albumId": 12,
                 "title": "heroesdelsilencio",
                 "url": "https://aaassd.cl",
-                "thumbnailUrl": ""
+                "thumbnailUrl": " "
             }
 
             const errors = photoValidator.saveAndUpdate(obj);
-            assert.isDefined(errors, "Es undefined");
+            assert.isDefined(errors.thumbnailUrl, "Es undefined");
             assert.isArray(errors.thumbnailUrl, "thumbnail no es array");
         } catch (error) {
             return Promise.reject(error);
@@ -127,11 +127,11 @@ describe("Photos Validator", () => {
                 "albumId": 12,
                 "title": "heroesdelsilencio",
                 "url": "https://aaassd.cl",
-                "thumbnailUrl": "asdecfds"
+                "thumbnailUrl": "aaa"
             }
 
             const errors = photoValidator.saveAndUpdate(obj);
-            assert.isDefined(errors, "Es undefined");
+            assert.isDefined(errors.thumbnailUrl, "Es undefined");
             assert.isArray(errors.thumbnailUrl, "thumbnail no es array");
         } catch (error) {
             return Promise.reject(error);
@@ -148,7 +148,7 @@ describe("Photos Validator", () => {
             }
 
             const errors = photoValidator.saveAndUpdate(obj);
-            assert.isDefined(errors, "Es undefined");
+            assert.isDefined(errors.thumbnailUrl, "Es undefined");
             assert.isArray(errors.thumbnailUrl, "thumbnail no es array");
         } catch (error) {
             return Promise.reject(error);
