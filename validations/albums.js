@@ -12,14 +12,14 @@ const saveAndUpdate = (album) => {
     }
 
     //title validations
-    if(!title){
+    if(!title || title.toString().trim() == ""){
         errors.title.push("El campo title es requerido");
     }else{
         if(title.trim().length < 10 || title.trim().length > 50){
             errors.title.push("El campo title debe contener entre 10 y 50 caracteres");
         }
     }
-
+    
     if(errors.userId.length > 0 ||
         errors.title.length > 0){
         return errors;

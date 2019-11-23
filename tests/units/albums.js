@@ -5,7 +5,7 @@ describe("Albums Validator", () => {
     it("El campo userId es requerido", () => {
         try {
             const obj = {
-                "userId": '',
+                "userId": "",
                 "title": "sunt qui excepturi placeat culpa"
               }
 
@@ -17,15 +17,16 @@ describe("Albums Validator", () => {
         }
     });
 
+
     it("El campo title es requerido", () => {
         try {
             const obj = {
                 "userId": 12,
-                "title": " "
+                "title": "  "
               }
 
               const errors = albumValidator.saveAndUpdate(obj);
-              assert.isDefined(errors, "Es undefined");
+              assert.isDefined(errors.title, "Es undefined");
               assert.isArray(errors.title, "title no es array");
         } catch (error) {
             return Promise.reject(error);
@@ -36,11 +37,11 @@ describe("Albums Validator", () => {
         try {
             const obj = {
                 "userId": 12,
-                "title": "asdfrrwqe"
+                "title": "asdfghb"
               }
 
               const errors = albumValidator.saveAndUpdate(obj);
-              assert.isDefined(errors, "Es undefined");
+              assert.isDefined(errors.title, "Es undefined");
               assert.isArray(errors.title, "title no es array");
         } catch (error) {
             return Promise.reject(error);
