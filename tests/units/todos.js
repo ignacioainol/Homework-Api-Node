@@ -11,7 +11,7 @@ describe("Todos Validator", () => {
               }
 
               const errors = todoValidator.saveAndUpdate(obj);
-               assert.isDefined(errors, "Es undefined");
+               assert.isDefined(errors.userId, "Es undefined");
                assert.isArray(errors.userId, "userId no es array");
         } catch (error) {
             return Promise.reject(error);
@@ -27,7 +27,7 @@ describe("Todos Validator", () => {
             }
 
             const errors = todoValidator.saveAndUpdate(obj);
-            assert.isDefined(errors, "Es undefined");
+            assert.isDefined(errors.title, "Es undefined");
             assert.isArray(errors.title, "title no es array");
             //assert.isEmpty(errors.title);
         } catch (error) {
@@ -40,7 +40,23 @@ describe("Todos Validator", () => {
             const obj = {
                 "userId": 2,
                 "title": "holamundosssa",
-                "completed": true
+                "completed": ''
+            }
+
+            const errors = todoValidator.saveAndUpdate(obj);
+            assert.isDefined(errors, "Es undefined");
+            assert.isArray(errors.completed, "completed no es array");
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    })
+
+    it("El campo completed debe ser booleano", () => {
+        try {
+            const obj = {
+                "userId": 2,
+                "title": "holamundosssa",
+                "completed": ""
             }
 
             const errors = todoValidator.saveAndUpdate(obj);

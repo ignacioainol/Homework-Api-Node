@@ -17,19 +17,19 @@ const saveAndUpdate = (todo) => {
     }
 
     //title validations
-    if(title.trim() == "" || !title){
+    if(!title || title.trim() == ""){
         errors.title.push("El campo title es requerido");
     }
 
     //completed validations
-    if(!isEmpty(completed)) {
+    if(!completed || completed == undefined || completed.toString().trim() == "") {
         errors.completed.push("El campo completed es requerido");
     }
-    // else{
-    //     if( typeof completed != "boolean")){
-    //         errors.completed.push("El campo completed debe ser booleano");
-    //     }
-    // }
+    else{
+        if( typeof completed != "boolean"){
+            errors.completed.push("El campo completed debe ser booleano");
+        }
+    }
 
 
     if(errors.userId.length > 0 ||
