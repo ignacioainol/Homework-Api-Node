@@ -83,7 +83,7 @@ describe("Comments Validator", () => {
             const obj = {
                 "postId": 12,
                 "name": "Cause you, you're walking on the edge You, you chose the way of love and pain laudantium enim quasi est quidem magnam voluptate ipsam  ",
-                "email": "    ",
+                "email": "  ",
                 "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
               }
 
@@ -97,11 +97,11 @@ describe("Comments Validator", () => {
         }
     });
 
-    it("Debe ser un email válido", () => {
+    it("El campo email debe ser válido", () => {
         try {
             const obj = {
                 "postId": 12,
-                "name": "Cause you, you're walking on the edge You, you chose the way of love and pain ",
+                "name": "Cause you, you're walking on the edge You, you chose the way of love and pain. You, you chose the way of love and pain ",
                 "email": "loquesea@algo",
                 "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
               }
@@ -120,7 +120,7 @@ describe("Comments Validator", () => {
         try {
             const obj = {
                 "postId": 12,
-                "name": "Cause you, you're walking on the edge You, you chose the way of love and pain ",
+                "name": "Cause you, you're walking on the edge You, you chose the way of love and pain You, you chose the way of love and pain ",
                 "email": "loquesea@algo.de",
                 "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
               }
@@ -141,11 +141,11 @@ describe("Comments Validator", () => {
                 "postId": 12,
                 "name": "Cause you, you're walking on the edge You, you chose the way of love and pain. You, you chose the way of love and pain  ",
                 "email": "loquesea@algo.cl",
-                "body": ''
+                "body": "  "
               }
 
               const errors = commentValidator.saveAndUpdate(obj);
-              assert.isDefined(errors, "Es undefined");
+              assert.isDefined(errors.body, "Es undefined");
               assert.isArray(errors.body, "body no es array");
 
 
@@ -160,7 +160,8 @@ describe("Comments Validator", () => {
                 "postId": 12,
                 "name": "Cause you, you're walking on the edge You, you chose the way of love and pain. You, you chose the way of love and pain  ",
                 "email": "loquesea@algo.cl",
-                "body": "Cause you, you're walking on the edge"
+                "body": "Cause you, you're walking on the edge",
+
               }
 
               const errors = commentValidator.saveAndUpdate(obj);
